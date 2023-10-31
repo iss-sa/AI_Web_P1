@@ -7,6 +7,8 @@ response = requests.get("http://info.cern.ch/hypertext/WWW/TheProject.html")
 #print(response.headers)
 #print(response.content)
 
+#ilvas versuch
+
 soup = BeautifulSoup(response.content, 'html.parser') # defualt parser html parser
 #print(soup.title)
 #print(soup.title.text)
