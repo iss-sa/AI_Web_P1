@@ -4,37 +4,54 @@ from bs4 import BeautifulSoup
 first_URL = "https://vm009.rz.uos.de/crawl/index.html"
 stack_crawler = [first_URL]
 
+dickk = {"ilva": ["no dic"]}
+dickk['ilva'].append("nio")
+lst = dickk.get("ilva")
+print(lst)
+
 indexing_dic = {}
-
-# GET request 
-#response = requests.get(stack_crawler.pop())
-#print(response.text)  # prints the request body (here: HTML content)
-#print(response.headers)
-#print(response.content)
-
-
-#soup = BeautifulSoup(response.content, 'html.parser') # defualt parser html parser
-#print(soup.title)
-#print(soup.title.text)
-#print(soup.prettify())
-
-"""# to find all links (always start with <a ...)
-for l in soup.find_all("a"):
-    #print(l)
-    #print(l.text)
-    print(l['href']) # extract URLs from link
-"""
 
 # while stack not empty
 while len(stack_crawler) != 0:
     URL = stack_crawler.pop()
     # If not visited frequently -> IMPLEMENTATION NEEDED ("update visited list")
-    response = requests.get(URL)
-    soup = BeautifulSoup(response.content, 'html.parser')
+    res = requests.get(URL)
+    soup = BeautifulSoup(res.content, "html.parser")
+    text = soup.find_all(text = True)
+    output = ''
+    blacklist = [
+        '[document]',
+        'noscript',
+        'header',
+        'html',
+        'meta',
+        'head', 
+        'input',
+        'script',
+    # name more elements if not required
+    ]
+    for t in text:
+        if t.parent.name not in blacklist:
+            output += '{} '.format(t)
 
+    output_lst = output.split()
+
+    keys = []
+    for word in output_lst:
+        if word not in keys:
+            keys.append(word)
+        else:
+            continue
+
+    print(keys)
+
+    for key in keys:
+        if key not in indexing_dic.keys():
+            indexing_dic[key] = [URL]
+        else:
+            indexing_dic[key].append(URL)
+    
     for l in soup.find_all("a"):
         stack_crawler.append(l['href']) # Invalid URL 'page3.html': No schema supplied.
+
         print(l['href'])
-
-
-
