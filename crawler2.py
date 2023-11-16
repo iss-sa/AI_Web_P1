@@ -5,13 +5,14 @@ from whoosh.fields import *
 from whoosh.qparser import QueryParser
 
 first_URL = "https://vm009.rz.uos.de/crawl/index.html"
+# for indexing
+schema = Schema(title=TEXT(stored=True), content=TEXT)
+# Create an index in the directory indexdr (the directory must already exist!)
+ix = create_in("indexdir", schema)
+writer = ix.writer()
 
-def crawl(first_URL, search):
-    # for indexing
-    schema = Schema(title=TEXT(stored=True), content=TEXT)
-    # Create an index in the directory indexdr (the directory must already exist!)
-    ix = create_in("indexdir", schema)
-    writer = ix.writer()
+def crawl(first_URL):
+    
 
     # for crawling
     stack_crawler = [first_URL]
@@ -49,18 +50,20 @@ def crawl(first_URL, search):
             for l in soup.find_all("a"):
                 stack_crawler.append(requests.compat.urljoin('https://vm009.rz.uos.de/crawl/index.html', l['href']))
 
-    writer.commit()
-    lst=[]
-    with ix.searcher() as searcher:
-        # find entries with the words 'first' AND 'last'
-        query = QueryParser("content", ix.schema).parse(search)
-        results = searcher.search(query)
-        for r in results:
-            lst.append(r)
+crawl(first_URL)
+writer.commit()
 
-        return lst
+search="platypus"
+
+with ix.searcher() as searcher:
+    # find entries with the words 'first' AND 'last'
+    query = QueryParser("content", ix.schema).parse(search)
+    results = searcher.search(query)
+    print(results)
+    for r in results:
+        print(r)
+
+
     
 
 
-answer = crawl(first_URL, "platypus")
-print(answer)
