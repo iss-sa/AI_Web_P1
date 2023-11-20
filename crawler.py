@@ -56,11 +56,11 @@ def crawl(first_URL, search):
         query = QueryParser("content", ix.schema).parse(search)
         results = searcher.search(query)
         for r in results:
-            lst.append(r)
+            lst.append(r["title"])
 
         return lst
     
 
 
-answer = crawl(first_URL, "platypus")
-print(answer)
+#answer = crawl(first_URL, "platypus")
+#print(answer)

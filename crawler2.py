@@ -54,14 +54,18 @@ crawl(first_URL)
 writer.commit()
 
 search="platypus"
-
+lst_res = []
 with ix.searcher() as searcher:
     # find entries with the words 'first' AND 'last'
     query = QueryParser("content", ix.schema).parse(search)
     results = searcher.search(query)
     print(results)
     for r in results:
-        print(r)
+        print(r["title"])
+        lst_res.append(r["title"])
+        print(type(r))
+print(lst_res)
+print(type(lst_res[0]))
 
 
     
