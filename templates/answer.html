@@ -9,7 +9,7 @@
         {% for item in result %}
         <li>  <a href ="{{ item[0] }}">{{ item[1]|capitalize }}</a> 
               <p> {{ item[0] }} </p>
-              <p> {{ item[2] }} </p>
+              <p> {{ item[2]|safe }} </p>
         </li>
         {% endfor %}
     </ul>
