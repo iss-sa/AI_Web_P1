@@ -8,10 +8,11 @@ first_URL = "https://vm009.rz.uos.de/crawl/index.html"
 
 def crawl(first_URL, search):
     # for indexing
-    schema = Schema(title=TEXT(stored=True), content=TEXT)
+    schema = Schema(title=TEXT(stored=True), content=TEXT(stored=True))
     # Create an index in the directory indexdr (the directory must already exist!)
     ix = create_in("indexdir", schema)
     writer = ix.writer()
+
 
     # for crawling
     stack_crawler = [first_URL]
@@ -51,14 +52,23 @@ def crawl(first_URL, search):
 
     writer.commit()
     lst=[]
+    # for titles and content of websites
+    titles = []
+    content = []
     with ix.searcher() as searcher:
         # find entries with the words 'first' AND 'last'
         query = QueryParser("content", ix.schema).parse(search)
         results = searcher.search(query)
         for r in results:
             lst.append(r["title"])
+            content.append(r.highlights("content"))
 
-        return lst
+        for url in lst:
+            title1 = url.replace("https://vm009.rz.uos.de/crawl/", "")
+            title = title1.replace(".html", "")
+            titles.append(title)
+
+        return zip(lst, titles, content)
     
 
 

@@ -3,10 +3,13 @@
 <header>
     <title>{{ title }}</title>
 </header>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
-    <h1>What are you looking for?</h1>
+    <h1>ILSA</h1>
+    <h2>What are you looking for?</h2>
     <form action="/answer" method="GET">
-        <input type="text" name="rev">
+        <input type="text" placeholder="Search with ILSA..." name="rev">
+        <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 </body>
 </html>

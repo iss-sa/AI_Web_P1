@@ -7,7 +7,10 @@
     <h1>Results</h1>
     <ul>
         {% for item in result %}
-        <li> {{ item }} </li>
+        <li>  <a href ="{{ item[0] }}">{{ item[1]|capitalize }}</a> 
+              <p> {{ item[0] }} </p>
+              <p> {{ item[2] }} </p>
+        </li>
         {% endfor %}
     </ul>
 </body>
