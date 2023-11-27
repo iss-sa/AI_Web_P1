@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html> 
 <header>
+    <style>
+        .box{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
     <title>{{ title }}</title>
     <!-- add icon link -->
     <link rel = "icon" href =  "img/favicon.ico" type="image/x-icon" type = "image/x-icon">
@@ -8,9 +15,9 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
-    <h1>ILSA</h1>
-    <h2>What are you looking for?</h2>
-    <form action="/answer" method="GET">
+    <h1 class = "box">ILSA</h1>
+    <h2 class = "box">What are you looking for?</h2>
+    <form action="/answer" method="GET" class = "box">
         <input type="text" placeholder="Search with ILSA..." name="rev">
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
