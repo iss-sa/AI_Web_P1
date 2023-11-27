@@ -4,20 +4,37 @@
     <title>{{ title }}</title>
 </header>
 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <body>
-    <h1>Results for: {{rev}}</h1>
-    <form action="/answer" method="GET">
-        <input type="text" placeholder="Search with ILSA..." name="rev">
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+    <div class="jumbotron text-center">
+        <h1>Results for: "{{ rev }}" </h1>
+        <form action="/answer" method="GET">
+            <input type="text" placeholder="Search with ILSA..." name="rev">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
     <ul>
         {% for item in result %}
-        <li>  <a href ="{{ item[0] }}">{{ item[1]|capitalize }}</a> 
-              <p> {{ item[0] }} </p>
-              <p> {{ item[2]|safe }} </p>
+        <li>    
+            <div class = "container">
+                <div class ="row">
+                    <div class = "col-sm-4">
+                        <h3><a href ="{{ item[0] }}">{{ item[1]|capitalize }}</a> </h3>
+                        <p> {{ item[0] }} </p>
+                        <p> {{ item[2]|safe }} </p>
+                    </div>
+                </div>
+            </div>
         </li>
         {% endfor %}
-    </ul>
+    </ul> 
 </body>
 </html>
