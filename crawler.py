@@ -55,10 +55,13 @@ def crawl(first_URL, search):
     # for titles and content of websites
     titles = []
     content = []
+    q = ""
     with ix.searcher() as searcher:
         # find entries with the words 'first' AND 'last'
         query = QueryParser("content", ix.schema).parse(search)
-        results = searcher.search(query)
+        corrected = searcher.correct_query(query, search)
+
+        results = searcher.search(corrected.query)
         for r in results:
             lst.append(r["title"])
             content.append(r.highlights("content"))

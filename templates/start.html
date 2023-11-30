@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html> 
 <header>
-    <style>
-        .box{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+
     <title>{{ title }}</title>
     <!-- add icon link -->
     <link rel = "icon" href =  "img/favicon.ico" type="image/x-icon" type = "image/x-icon">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+        .jumbotron{
+            background: rgb(225, 214, 238)
+        }
+    </style>
+
 </header>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <body>
-    <h1 class = "box">ILSA</h1>
-    <img class = "logo" src="img/ILSA_title.png" alt="logo">
-    <h2 class = "box">What are you looking for?</h2>
-    <form action="/answer" method="GET" class = "box">
-        <input type="text" placeholder="Search with ILSA..." name="rev">
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+    <div class = "jumbotron text-center">
+        <h1 class = "box">ILSA</h1>
+        <img class = "logo" src="img/ILSA_title.png" alt="logo">
+        <h2 class = "box">What are you looking for?</h2>
+        <form action="/answer" method="GET" class = "box">
+            <input type="text" placeholder="Search with ILSA..." name="rev">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    
 </body>
 </html>
