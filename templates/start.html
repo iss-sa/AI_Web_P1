@@ -4,7 +4,7 @@
 
     <title>{{ title }}</title>
     <!-- add icon link -->
-    <link rel = "icon" href =  "img/favicon.ico" type="image/x-icon" type = "image/x-icon">
+    <link rel = "icon" href =  "/img/favicon.ico" type="image/x-icon" type = "image/x-icon">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +19,7 @@
         .jumbotron{
             background: rgb(225, 214, 238)
         }
+
     </style>
 
 </header>
@@ -26,14 +27,18 @@
 
 <body>
     <div class = "jumbotron text-center">
-        <h1 class = "box">ILSA</h1>
-        <img class = "logo" src="img/ILSA_title.png" alt="logo">
+        <h1 class = "box">
+            <a href="https://lh3.googleusercontent.com/pw/ADCreHct9yHpkELXC_RRfp8sayFSzs5yAgg4VYQodyq4Ktbjayajd_08z76MOzoMh0F9Mr_eRZsJgTZSblvPyQnguaU6PeqGaQJ_zPfGIKKXgy20dsQy0Fo=w2400?source=screenshot.guru"> <img src="https://lh3.googleusercontent.com/pw/ADCreHct9yHpkELXC_RRfp8sayFSzs5yAgg4VYQodyq4Ktbjayajd_08z76MOzoMh0F9Mr_eRZsJgTZSblvPyQnguaU6PeqGaQJ_zPfGIKKXgy20dsQy0Fo=w272-h92-p-k" /> </a>
+        </h1>
+        
         <h2 class = "box">What are you looking for?</h2>
         <form action="/answer" method="GET" class = "box">
             <input type="text" placeholder="Search with ILSA..." name="rev">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
+
+   
     
 </body>
 </html>
