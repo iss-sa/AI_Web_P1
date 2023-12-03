@@ -4,8 +4,10 @@ from whoosh.index import create_in
 from whoosh.fields import *
 from whoosh.qparser import QueryParser
 
+
 first_URL = "https://vm009.rz.uos.de/crawl/index.html"
 
+# crawler including new index
 def crawl(first_URL, search):
     # for indexing
     schema = Schema(title=TEXT(stored=True), content=TEXT(stored=True))
@@ -23,13 +25,13 @@ def crawl(first_URL, search):
         URL = stack_crawler.pop()
         # If not visited yet, visit website
         if (URL not in visited_lst):
-
             visited_lst.append(URL)
 
             res = requests.get(URL, allow_redirects=False)
             soup = BeautifulSoup(res.content, "html.parser")
             text = soup.find_all(text = True)
-            output = ''
+            output = '' # all the content text of website
+            # to exlude unwanted elements
             blacklist = [
                 '[document]',
                 'noscript',
@@ -45,35 +47,35 @@ def crawl(first_URL, search):
                 if t.parent.name not in blacklist:
                     output += '{} '.format(t)
 
+            #add url and content to index writer
             writer.add_document(title=URL, content=output)
             
+            # find all links on site and add to stack
             for l in soup.find_all("a"):
                 stack_crawler.append(requests.compat.urljoin('https://vm009.rz.uos.de/crawl/index.html', l['href']))
 
+    #close writer and commit all previous changes
     writer.commit()
-    lst=[]
+    lst=[] # for urls
     # for titles and content of websites
     titles = []
     content = []
-    q = ""
+
+    # index search
     with ix.searcher() as searcher:
-        # find entries with the words 'first' AND 'last'
+        # index as AND operator
         query = QueryParser("content", ix.schema).parse(search)
-        corrected = searcher.correct_query(query, search)
+        corrected = searcher.correct_query(query, search) # always correct query just in case
 
         results = searcher.search(corrected.query)
         for r in results:
             lst.append(r["title"])
             content.append(r.highlights("content"))
 
+        # to get the website name form the url
         for url in lst:
             title1 = url.replace("https://vm009.rz.uos.de/crawl/", "")
             title = title1.replace(".html", "")
             titles.append(title)
 
         return zip(lst, titles, content)
-    
-
-
-#answer = crawl(first_URL, "platypus")
-#print(answer)
